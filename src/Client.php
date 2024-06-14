@@ -25,7 +25,7 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class Client implements ClientInterface
 {
-    private const string SDK_VERSION = '0.3.0-php';
+    private const string SDK_VERSION = '0.4.0-php';
 
     private GuzzleClient $guzzleClient;
 
