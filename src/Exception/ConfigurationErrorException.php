@@ -1,6 +1,8 @@
 <?php
 namespace Citadel\Exception;
 
-class ConfigurationErrorException extends CitadelBaseException
+use Citadel\Interface\CitadelReportedExceptionInterface;
+
+class ConfigurationErrorException extends CitadelBaseException implements CitadelReportedExceptionInterface
 {
 }

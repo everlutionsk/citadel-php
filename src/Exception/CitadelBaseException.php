@@ -5,7 +5,7 @@ use Citadel\Interface\CitadelReportedExceptionInterface;
 use Exception;
 use Throwable;
 
-class CitadelBaseException extends Exception implements CitadelReportedExceptionInterface
+class CitadelBaseException extends Exception
 {
     public function __construct(
         string $message = "Unidentified API error",
