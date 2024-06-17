@@ -7,19 +7,19 @@
     {
       "name": "Ivan Barlog",
       "email": "ivan.barlog@everlution.sk"
+    },
+    {
+      "name": "Thunder Raven-Stoker",
+      "email": "thunder.raven-stoker@everlution.com"
     }
   ],
   "require": {
-    "php": "^7.4|^8.0",
+    "php": "^8.3",
     "guzzlehttp/guzzle": "^6.0"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/BeeSolve/citadel-php"
-    }
-  ],
   "autoload": {
-    "files": ["src/CitadelClient.php"]
+    "psr-4": {
+      "Citadel\\": "src"
+    }
   }
 }
