@@ -25,7 +25,7 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class Client implements ClientInterface
 {
-    private const string SDK_VERSION = '0.4.0-php';
+    private const string SDK_VERSION = '0.4.1-php';
 
     private GuzzleClient $guzzleClient;
 
@@ -57,6 +57,9 @@ class Client implements ClientInterface
         });
     }
 
+    /**
+     * @throws MalformedPayloadException
+     */
     public function sessionRevoke(SessionRevokeRequest $request): SessionRevokeResponse
     {
         return $this->sendRequest('/sessions.revoke', $request, function ($responseData) {
@@ -64,6 +67,9 @@ class Client implements ClientInterface
         });
     }
 
+    /**
+     * @throws MalformedPayloadException
+     */
     public function sessionResolveBearer(SessionResolveBearerRequest $request): SessionResolveBearerResponse
     {
         return $this->sendRequest('/sessions.bearerResolve', $request, function ($responseData) {
@@ -72,6 +78,9 @@ class Client implements ClientInterface
         });
     }
 
+    /**
+     * @throws MalformedPayloadException
+     */
     public function sessionRevokeBearer(SessionRevokeBearerRequest $request): SessionRevokeBearerResponse
     {
         return $this->sendRequest('/sessions.bearerRevoke', $request, function ($responseData) {
