@@ -6,7 +6,9 @@ use Citadel\Action\SessionResolveBearerRequest;
 use Citadel\Action\SessionResolveRequest;
 use Citadel\Action\SessionRevokeBearerRequest;
 use Citadel\Action\SessionRevokeRequest;
+use Citadel\Exception\CitadelBaseException;
 use Citadel\Exception\ExceptionFactory;
+use Citadel\Exception\InternalServerErrorException;
 use Citadel\Exception\MalformedPayloadException;
 use Citadel\Exception\MalformedTimestampException;
 use Citadel\Interface\CitadelReportedExceptionInterface;
@@ -79,7 +81,9 @@ class Client implements ClientInterface
     }
 
     /**
+     * @throws InternalServerErrorException
      * @throws MalformedPayloadException
+     * @throws CitadelBaseException
      */
     public function sessionRevokeBearer(SessionRevokeBearerRequest $request): SessionRevokeBearerResponse
     {
@@ -89,7 +93,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * @throws MalformedPayloadException|CitadelReportedExceptionInterface
+     * @throws InternalServerErrorException
+     * @throws MalformedPayloadException|CitadelReportedExceptionInterface|CitadelBaseException
      */
     private function sendRequest(
         string $action,
@@ -112,7 +117,8 @@ class Client implements ClientInterface
                 'Content-Type' => 'application/json',
                 'x-sdk-version' => self::SDK_VERSION
             ],
-            'body' => $requestBody
+            'body' => $requestBody,
+            'http_errors' => false
         ]);
 
         $statusCode = $response->getStatusCode();

@@ -1,7 +1,6 @@
 <?php
 namespace Citadel\Exception;
 
-use Citadel\Interface\CitadelReportedExceptionInterface;
 use Exception;
 use Throwable;
 

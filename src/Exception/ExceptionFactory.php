@@ -20,11 +20,18 @@ class ExceptionFactory
 
     /**
      * @throws CitadelReportedExceptionInterface
+     * @throws InternalServerErrorException
+     * @throws MalformedPayloadException|CitadelBaseException
      */
     public static function generateExceptionFromResponse(ResponseInterface $response) :never
     {
         $body = $response->getBody()->getContents();
         $statusCode = $response->getStatusCode();
+
+        if ($statusCode >= 500) {
+            throw new InternalServerErrorException("Citadel reported internal server error", $statusCode);
+        }
+
         try {
             $errorResponse = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
