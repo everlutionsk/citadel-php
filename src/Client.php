@@ -6,6 +6,8 @@ use Citadel\Action\SessionResolveBearerRequest;
 use Citadel\Action\SessionResolveRequest;
 use Citadel\Action\SessionRevokeBearerRequest;
 use Citadel\Action\SessionRevokeRequest;
+use Citadel\Action\UserImpersonateRequest;
+use Citadel\Action\UserStopImpersonateRequest;
 use Citadel\Exception\CitadelBaseException;
 use Citadel\Exception\ExceptionFactory;
 use Citadel\Exception\InternalServerErrorException;
@@ -23,6 +25,8 @@ use Citadel\Payload\SessionResolveBearerResponse;
 use Citadel\Payload\SessionResolveResponse;
 use Citadel\Payload\SessionRevokeBearerResponse;
 use Citadel\Payload\SessionRevokeResponse;
+use Citadel\Payload\UserImpersonateResponse;
+use Citadel\Payload\UserStopImpersonateResponse;
 use GuzzleHttp\Client as GuzzleClient;
 
 class Client implements ClientInterface
@@ -89,6 +93,30 @@ class Client implements ClientInterface
     {
         return $this->sendRequest('/sessions.bearerRevoke', $request, function ($responseData) {
             return new SessionRevokeBearerResponse($responseData['status']);
+        });
+    }
+
+    /**
+     * @throws InternalServerErrorException
+     * @throws MalformedPayloadException
+     * @throws CitadelBaseException
+     */
+    public function userImpersonate(UserImpersonateRequest $request): UserImpersonateResponse
+    {
+        return $this->sendRequest('/users.adminImpersonate', $request, function ($responseData) {
+            return new UserImpersonateResponse($responseData['status']);
+        });
+    }
+
+    /**
+     * @throws InternalServerErrorException
+     * @throws MalformedPayloadException
+     * @throws CitadelBaseException
+     */
+    public function userStopImpersonate(UserStopImpersonateRequest $request): UserStopImpersonateResponse
+    {
+        return $this->sendRequest('/users.adminStopImpersonating', $request, function ($responseData) {
+            return new UserStopImpersonateResponse($responseData['status']);
         });
     }
 
